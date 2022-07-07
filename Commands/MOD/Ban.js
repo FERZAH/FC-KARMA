@@ -15,7 +15,7 @@ module.exports.run = async (client, message, args, embed) => {
 
     if (args[0] && args[0].includes('list')) {
         try {
-            message.guild.fetchBans().then(bans => {
+            message.guild.bans.fetch().then(bans => {
                 message.channel.send({ content: `# Sunucudan yasaklanmış kişiler; ⛔\n\n${bans.map(c => `${c.user.id} | ${c.user.tag}`).join("\n")}\n\n# Toplam "${bans.size}" adet yasaklanmış kullanıcı bulunuyor.`, code: 'xl', split: true });
             });
         } catch (err) { message.channel.send({ content: `Yasaklı kullanıcı bulunmamakta!` }).then(x => x.delete({ timeout: 5000 }));; }
