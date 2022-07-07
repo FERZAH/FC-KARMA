@@ -9,8 +9,8 @@ module.exports.run = async (client, message, args, embed) => {
     let sebep = args.slice(1).join(' ')
     if (args[0] == "bilgi" || args[0] == "info") {
         if (!args[1] || isNaN(args[1])) return message.channel.send({ embeds: [embed.setDescription(`${message.member}, Lütfen bir kullanıcı ID giriniz.`)] }).sil(7);
-        let banlar = await message.guild.fetchBans()
-        return message.guild.fetchBan(args.slice(1).join(' ')).then(({ user, reason }) => message.channel.send({ embeds: [embed.setDescription(`**Banlanan Üye:** ${user.tag} (${user.id})\n**Ban Sebebi:** ${reason ? reason : "Belirtilmemiş!"}`)] })).catch(err => { message.channel.send({ embeds: [embed.setDescription("Belirtilen ID numarasına sahip bir ban bulunamadı!")] }).sil(7) });
+        let banlar = await message.guild.bans.fetch()
+        return message.guild.bans.fetch(args.slice(1).join(' ')).then(({ user, reason }) => message.channel.send({ embeds: [embed.setDescription(`**Banlanan Üye:** ${user.tag} (${user.id})\n**Ban Sebebi:** ${reason ? reason : "Belirtilmemiş!"}`)] })).catch(err => { message.channel.send({ embeds: [embed.setDescription("Belirtilen ID numarasına sahip bir ban bulunamadı!")] }).sil(7) });
     }
 
     if (args[0] && args[0].includes('list')) {
